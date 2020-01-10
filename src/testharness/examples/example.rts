@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (c) 2001-2013 Oracle and/or its affiliates. All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+      - Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+
+      - Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+
+      - Neither the name of Oracle nor the names of its
+        contributors may be used to endorse or promote products derived
+        from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<suite>
+	<!--
+		header. A header can contain any information.
+		This example uses Dublin Core, but you may write anything you want.
+	-->
+	<header xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<dc:creator>Sun Microsystems</dc:creator>
+		<dc:title>Sample test suite to test the harness code</dc:title>
+		
+		<author mailto="kohsuke.kawaguchi@sun.com">Kohsuke KAWAGUCHI</author>
+		<version>$Id: example.rts 1793 2013-02-18 12:52:53Z snajper $</version>
+	</header>
+	
+	<!--
+		One test case consists of either 1) a valid RELAX NG pattern and several valid/invalid test documents
+		or 2) several invalid RELAX NG patterns.
+		
+		The first <testCase> element is an example of the formar type, the next <testCase> element
+		is an example of the latter type.
+	-->
+	<testCase>
+		<header>
+			Does the processor support W3C XML Schema as a datatype library?
+		</header>
+		<validPattern name="W3C XML Schema datatypes test">
+			<element name="root" xmlns="http://relaxng.org/ns/structure/0.9" datatypeLibrary="http://www.w3.org/2001/XMLSchema">
+				<data type="integer"/>
+			</element>
+		</validPattern>
+		<!--
+			<valid> represents a valid instance.
+			<invalid> represents an invalid instance.
+			These are tested against the pattern specified in the <validPattern> element.
+		-->
+		<valid>
+			<root>5</root>
+		</valid>
+		<valid>
+			<root> -52 </root>
+		</valid>
+		<invalid>
+			<root> abc </root>
+		</invalid>
+	</testCase>
+	
+	<testCase>
+		<!--
+			A test case can contain multiple invalid RELAX NG patterns.
+			Processors are required to reject those patterns.
+		-->
+		<invalidPattern>
+			<element name="root" xmlns="http://relaxng.org/ns/structure/0.9">
+				<!-- undefined datatype -->
+				<data type="integer"/>
+			</element>
+		</invalidPattern>
+		<invalidPattern>
+			<element name="root" xmlns="http://relaxng.org/ns/structure/0.9">
+				<whatTheHeckIsThis/>
+			</element>
+		</invalidPattern>
+	</testCase>
+</suite>

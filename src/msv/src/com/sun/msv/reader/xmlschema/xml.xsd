@@ -1,0 +1,82 @@
+<!--
+
+    Copyright (c) 2001-2013 Oracle and/or its affiliates. All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+      - Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+
+      - Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+
+      - Neither the name of Oracle nor the names of its
+        contributors may be used to endorse or promote products derived
+        from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+    IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+    PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+    CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+    PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+    LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+    NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<?xml version='1.0'?>
+<xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xml:lang="en">
+
+ <xs:annotation>
+  <xs:documentation>This schema defines attributes and an attribute group
+        suitable for use by
+        schemas wishing to allow xml:lang or xml:space attributes
+        on elements they define.
+
+        To enable this, such a schema must import this schema
+        for the XML namespace, e.g. as follows:
+        &lt;schema . . .>
+         . . .
+         &lt;import namespace="http://www.w3.org/XML/1998/namespace"
+                    schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+
+        Subsequently, qualified reference to either of the attributes
+        or the group defined below will have the desired effect, e.g.
+
+        &lt;type . . .>
+         . . .
+         &lt;attributeGroup ref="xml:specialAttrs"/>
+ 
+         will define a type which will schema-validate a instance
+         element with both xml:space and xml:lang attribute</xs:documentation>
+ </xs:annotation>
+
+ <xs:attribute name="lang" type="xs:language">
+  <xs:annotation>
+   <xs:documentation>In due course, we should install the relevant ISO 2- and 3-letter
+         codes as the enumerated possible values . . .</xs:documentation>
+  </xs:annotation>
+ </xs:attribute>
+
+ <xs:attribute name="space" default="preserve">
+  <xs:simpleType>
+   <xs:restriction base="xs:NCName">
+    <xs:enumeration value="default"/>
+    <xs:enumeration value="preserve"/>
+   </xs:restriction>
+  </xs:simpleType>
+ </xs:attribute>
+
+ <xs:attributeGroup name="specialAttrs">
+  <xs:attribute ref="xml:lang"/>
+  <xs:attribute ref="xml:space"/>
+ </xs:attributeGroup>
+
+</xs:schema>
