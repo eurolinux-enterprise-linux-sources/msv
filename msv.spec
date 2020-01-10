@@ -1,7 +1,9 @@
+%global __requires_exclude ^mvn\\(org\\.apache\\.ant:ant\\)$
+
 Name:          msv
 Epoch:         1
 Version:       2013.5.1
-Release:       6%{?dist}
+Release:       7%{?dist}
 Summary:       Multi-Schema Validator
 Group:         Development/Libraries
 License:       BSD and ASL 1.1
@@ -239,6 +241,10 @@ cp -pr xsdlib/examples/* %{buildroot}%{_datadir}/%{name}-%{version}/xsdlib
 %{_datadir}/%{name}-%{version}
 
 %changelog
+* Tue Mar 15 2016 Mikolaj Izdebski <mizdebsk@redhat.com> - 1:2013.5.1-7
+- Remove requires on ant
+- Resolves: rhbz#1284579
+
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1:2013.5.1-6
 - Mass rebuild 2013-12-27
 
