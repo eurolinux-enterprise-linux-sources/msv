@@ -1,7 +1,7 @@
 Name:          msv
 Epoch:         1
 Version:       2013.5.1
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       Multi-Schema Validator
 Group:         Development/Libraries
 License:       BSD and ASL 1.1
@@ -239,6 +239,9 @@ cp -pr xsdlib/examples/* %{buildroot}%{_datadir}/%{name}-%{version}/xsdlib
 %{_datadir}/%{name}-%{version}
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1:2013.5.1-6
+- Mass rebuild 2013-12-27
+
 * Tue Aug 27 2013 Michal Srb <msrb@redhat.com> - 1:2013.5.1-5
 - Migrate away from mvn-rpmbuild (Resolves: #997443)
 
